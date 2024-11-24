@@ -9,8 +9,14 @@ export interface BuildPath {
     html: string;
 }
 
+export interface BuildEnv {
+    mode: BuildModeEnum;
+    port: number;
+}
+
 export interface BuildOptions {
     mode: BuildModeEnum;
     path: BuildPath;
     isDev: boolean;
+    port: number;
 }
