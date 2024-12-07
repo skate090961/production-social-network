@@ -2,6 +2,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack";
 import {BuildOptions} from "./types/config";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 
 export function buildPlugins({path}: BuildOptions): webpack.WebpackPluginInstance[] {
     return [
@@ -12,6 +13,9 @@ export function buildPlugins({path}: BuildOptions): webpack.WebpackPluginInstanc
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:8].css',
             chunkFilename: 'css/[name].[contenthash:8].css',
+        }),
+        new TerserPlugin({
+            extractComments: false,
         })
     ]
 }

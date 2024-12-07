@@ -4,7 +4,7 @@ import {buildResolvers} from "./buildResolvers";
 import {BuildOptions} from "./types/config";
 import webpack from "webpack";
 import {buildDevServer} from "./buildDevServer";
-import TerserPlugin from "terser-webpack-plugin";
+
 export function buildWebpackConfig(options: BuildOptions): webpack.Configuration {
     const {mode, path, isDev} = options;
 
@@ -20,13 +20,8 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
         module: {
             rules: buildLoaders(options)
         },
-        resolve: buildResolvers(),
+        resolve: buildResolvers(options),
         devtool: isDev ? 'inline-source-map' : undefined,
         devServer: isDev ? buildDevServer(options) : undefined,
-        optimization: {
-            minimizer: [new TerserPlugin({
-                extractComments: false,
-            })],
-        },
     }
 }

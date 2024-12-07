@@ -1,5 +1,5 @@
 import React, {FC, useMemo, useState} from 'react';
-import {CreateContextProps, LS_THEME_KEY, Theme, ThemeContext} from "./ThemeContext";
+import {CreateContextProps, LS_THEME_KEY, Theme, ThemeContext} from "app/providers/ThemeProvider/lib/ThemeContext";
 
 const initTheme = localStorage.getItem(LS_THEME_KEY) as Theme || Theme.LIGHT;
 
