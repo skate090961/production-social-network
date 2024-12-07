@@ -4,8 +4,8 @@ import {BuildOptions} from "./types/config";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
-export function buildPlugins({path}: BuildOptions): webpack.WebpackPluginInstance[] {
-    return [
+export function buildPlugins({path, isDev}: BuildOptions): webpack.WebpackPluginInstance[] {
+    const plugins: webpack.WebpackPluginInstance[] = [
         new HtmlWebpackPlugin({
             template: path.html,
         }),
@@ -14,8 +14,13 @@ export function buildPlugins({path}: BuildOptions): webpack.WebpackPluginInstanc
             filename: 'css/[name].[contenthash:8].css',
             chunkFilename: 'css/[name].[contenthash:8].css',
         }),
-        new TerserPlugin({
+    ];
+
+    if (!isDev) {
+        plugins.push(new TerserPlugin({
             extractComments: false,
-        })
-    ]
+        }));
+    }
+
+    return plugins;
 }
